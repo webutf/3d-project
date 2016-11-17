@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title></title>
+		<style>
+			body,ul,li{
+				margin:0;
+				padding:0;
+			}
+			body{
+				background:url("img/bg-texture.jpg");
+			}
+			.clock{
+				width:600px;
+				height:600px;
+				list-style:none;
+				background:url("img/clockface.PNG") no-repeat;
+			}
+			.sec,.min,.hour{
+				position:absolute;
+				width:30px;
+				height:600px;
+				top:0;
+				left:285px;
+			}
+			.hour{
+				background:url("img/hourhand.png"); 
+				z-index: 1;
+			}
+			.sec{
+				background:url("img/sechand.png");
+				z-index:3;
+			}
+			.min{
+				background:url("img/minhand.png") ;
+				z-index: 2;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="clock">
+		  <li class="hour"></li>
+		  <li class="min"></li>
+		  <li class="sec"></li>
+		</ul>
+	</body>
+</html>
+<script >
+onload=function(){
+	var oLi=document.getElementsByTagName("li");
+	hour();
+	min();
+	sec();
+	setInterval(hour,1000);
+	setInterval(min,1000);
+	setInterval(sec,1000);
+	function hour(){
+		var hours = new Date().getHours();
+        var mins = new Date().getMinutes();
+        var hdegree = hours * 30 + (mins / 2);
+        var hrotate = "rotate(" + hdegree + "deg)";
+        oLi[0].style.transform=hrotate;
+	}
+	function min(){
+		var mins = new Date().getMinutes();
+        var mdegree = mins * 6;
+        var mrotate = "rotate(" + mdegree + "deg)";
+        oLi[1].style.transform=mrotate;
+	}
+	function sec(){
+		var seconds = new Date().getSeconds();
+        var sdegree = seconds * 6;
+        var srotate = "rotate(" + sdegree + "deg)";
+        oLi[2].style.transform=srotate;
+	}
+}
+</script>
